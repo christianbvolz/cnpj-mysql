@@ -17,13 +17,15 @@ pip install psycopg2-binary (testado no Ubuntu)
 
 import pandas as pd, sqlalchemy, glob, time, dask.dataframe as dd
 import os, sys
+from dotenv import load_dotenv
+load_dotenv()
 
 #%% DEFINA os parâmetros do servidor.
 tipo_banco= 'mysql'
-dbname = 'cnpj'
-username = 'root'
-password = ''
-host = '127.0.0.1'
+dbname = os.environ['dbname']
+username = os.environ['username']
+password = os.environ['password']
+host = os.environ['host']
 
 # tipo_banco = 'postgres'
 # dbname = 'cnpj'
@@ -32,7 +34,7 @@ host = '127.0.0.1'
 # host = '127.0.0.1'
 
 pasta_compactados = r"dados-publicos-zip"
-pasta_saida = r"dados-publicos" #esta pasta deve estar vazia. 
+pasta_saida = r"dados-para-test" #esta pasta deve estar vazia. 
 dataReferencia = 'dd/mm/2023' #input('Data de referência da base dd/mm/aaaa: ')
 
 resp = input(f'Isto irá CRIAR TABELAS ou REESCREVER TABELAS no database {dbname.upper()} no servidor {tipo_banco} {host} e MODIFICAR a pasta {pasta_saida}. Deseja prosseguir? (S/N)?')
@@ -56,13 +58,13 @@ else:
 #    1/0
 
 #%%
-arquivos_a_zipar = list(glob.glob(os.path.join(pasta_compactados,r'*.zip')))
-import zipfile
+# arquivos_a_zipar = list(glob.glob(os.path.join(pasta_compactados,r'*.zip')))
+# import zipfile
 
-for arq in arquivos_a_zipar:
-    print('descompactando ' + arq)
-    with zipfile.ZipFile(arq, 'r') as zip_ref:
-        zip_ref.extractall(pasta_saida)
+# for arq in arquivos_a_zipar:
+#     print('descompactando ' + arq)
+#     with zipfile.ZipFile(arq, 'r') as zip_ref:
+#         zip_ref.extractall(pasta_saida)
         
 #%%
 #tipos = ['.EMPRECSV', '.ESTABELE', '.SOCIOCSV']

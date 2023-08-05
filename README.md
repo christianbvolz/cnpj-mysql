@@ -6,6 +6,15 @@ Os arquivos csv zipados com os dados de CNPJs estão disponíveis em https://dad
 
 
 ## Pré-requisitos:
+
+Crie o ambiente virtual para o projeto:
+
+python3 -m venv .venv && source .venv/bin/activate
+
+Instale as dependências:
+
+python3 -m pip install -r requirements.txt
+
 Python 3.8;<br>
 Bibliotecas pandas, dask, sqlalchemy. Para mysql instalar a biblioteca pymysql. Para postgres usar psycopg2.<br>
 Para instalar a biblioteca, use o comando<br>
